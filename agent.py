@@ -14,11 +14,11 @@ class Agent(object):
         self.direction = np.array([0.0, 0.0])
         self.actualV = np.array([0.0,0.0])
         self.acclTime = 10.0
-        self.pos = np.array([10.0, 10.0])
+        self.pos = np.array([10.0, 10.0])  # This is a major problem for two agents cannot be in the same point
         self.dest = np.array([100.0,10.0])
         self.bodyFactor = 120000
         self.slideFricFactor = 240000
-        self.A = 2000
+        self.A = 2000  # I am not sure whether the value works out.  So I try different values.  Any suggestions?  
         self.B = 0.08
 
     # def step(self):
@@ -55,7 +55,7 @@ class Agent(object):
         second = self.slideFricFactor*g(rij-dij)*deltaVij*tij
         return first + second
 
-    def wallInteraction(self, wall):
+    def wallInteraction(self, wall):   # Does anyone want to improve the wall interaction here?  
         ri = self.radius
         diw,niw = distanceP2W(self.pos,wall)
         first = (self.A*np.exp((ri-diw)/self.B) + self.bodyFactor*g(ri-diw))*niw
