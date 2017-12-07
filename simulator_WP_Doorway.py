@@ -4,7 +4,7 @@
 import pygame
 import pygame.draw
 import numpy as np
-from agent_Random import *
+from agent_WP_Random import *
 from tools import *
 #from config import *
 #import random
@@ -51,20 +51,6 @@ agents = []
 for n in range(AGENTSNUM):
     agent = Agent()
     agents.append(agent)
-
-
-#agents[1].pos = np.array([80, 12])
-#agents[1].dest = np.array([20.0,10.0])        
-#agents[1].direction = normalize(agents[1].dest - agents[1].pos)
-#agents[1].desiredSpeed = 1.8
-#agents[1].desiredV = agents[1].desiredSpeed*agents[1].direction
-
-#agents[2].pos = np.array([80, 16])
-#agents[2].dest = np.array([20.0,18.0])        
-#agents[2].direction = normalize(agents[2].dest - agents[2].pos)
-#agents[2].desiredSpeed = 1.2 
-#agents[2].desiredV = agents[2].desiredSpeed*agents[2].direction
-#agents[2].B = 3.6
 
 
 running = True
@@ -135,11 +121,6 @@ while running:
     
 
     for agent in agents:
-	
-	#if agent.posX > 35:
-	#    agent.Goal = 1
-	#    agent.timeOut = pygame.time.get_ticks()
-	#    print('Time to Reach the Goal:', agent.timeOut)
 	
         #scPos = agent.pos*10 #worldCoord2ScreenCoord(agent.pos, SCREENSIZE, RESOLUTION)
         scPos = [0, 0]
