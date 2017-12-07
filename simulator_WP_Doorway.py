@@ -4,7 +4,7 @@
 import pygame
 import pygame.draw
 import numpy as np
-from agent_WP_Random import *
+from agent_Random import *
 from tools import *
 #from config import *
 #import random
