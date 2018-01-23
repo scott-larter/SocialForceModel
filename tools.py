@@ -34,7 +34,7 @@ def normalize(v):
     return v/norm
 
 def g(x):
-    return np.max(x, 0.0)
+    return np.max(x, 0)   # Keep compatiable with numpy in 1.14.0 version
 
 
 # 计算点到线段的距离，并计算由点到与线段交点的单位向量
