@@ -1,13 +1,11 @@
 # -*-coding:utf-8-*-
-# Author: Shen Shen
-# Email: dslwz2002@163.com
+# Author: Scott Larter
 
 import numpy as np
 
-# 从世界坐标系转换到屏幕坐标，注意传入行向量
 def worldCoord2ScreenCoord(worldCoord,screenSize, res):
     wc = np.append(worldCoord,1.0)
-    # 要翻转y轴
+
     mirrorMat = np.matrix([
         [1, 0, 0],
         [0, -1, 0],
@@ -26,18 +24,15 @@ def worldCoord2ScreenCoord(worldCoord,screenSize, res):
     result = wc*scaleMat*mirrorMat*transMat
     return np.array(np.round(result.tolist()[0][:2]),dtype=int)
 
-
 def normalize(v):
-    norm=np.linalg.norm(v)
-    if norm==0:
-       return v
-    return v/norm
+    norm = np.linalg.norm(v)
+    if norm == 0.0:
+        return v
+    return v / norm
 
 def g(x):
     return np.max(x, 0)   # Keep compatiable with numpy in 1.14.0 version
 
-
-# 计算点到线段的距离，并计算由点到与线段交点的单位向量
 def distanceP2W(point, wall):
     p0 = np.array([wall[0],wall[1]])
     p1 = np.array([wall[2],wall[3]])
@@ -57,6 +52,23 @@ def distanceP2W(point, wall):
     npw = normalize(cross-point)
     return dist,npw
 
+def centerOfMass(points):
+    x_numer = 0
+    x_denom = 0
+    y_numer = 0
+    y_denom = 0
+
+    for point in points:
+        x_numer += point.mass * point.posX
+        x_denom += point.mass
+        y_numer += point.mass * point.posY
+        y_denom += point.mass
+
+    x = x_numer / x_denom
+    y = y_numer / y_denom
+
+    return np.array([x, y])
+
 if __name__ == '__main__':
     # v1 = np.array([3.33,3.33])
     # print(worldCoord2ScreenCoord(v1, [1000,800],30))
@@ -65,6 +77,6 @@ if __name__ == '__main__':
     # v3 = np.array([29.97,23.31])
     # print(worldCoord2ScreenCoord(v3, [1000,800],30))
     wall = [3.33, 3.33, 29.97, 3.33]
-    print distanceP2W(np.array([10.0,10.0]),wall)
+    print(distanceP2W(np.array([10.0,10.0]),wall))
     # print distanceP2W(np.array([0.5,2.0]),wall)
     # print distanceP2W(np.array([2.0,2.0]),wall)

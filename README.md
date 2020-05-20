@@ -10,4 +10,4 @@
 
 Thank Shen Shen for his original work in Python.  His coding work is wonderful.  
 Below are some python program that I build up based on Shen Shen's code.    
-https://github.com/godisreal/group-social-force
+https://github.com/scott-larter/group-social-force
